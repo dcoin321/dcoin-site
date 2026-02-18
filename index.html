@@ -3,24 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <title>DCOIN Login</title>
+
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
 <div class="login-box">
-    <h1>DCOIN</h1>
-    <h2>Bem-vindo</h2>
 
-    <input type="text" id="usuario" placeholder="Usuário">
-    <input type="password" id="senha" placeholder="Senha">
+<h1>DCOIN</h1>
 
-    <button onclick="login()">Entrar</button>
+<input type="text" id="usuario" placeholder="Usuário">
 
-    <p id="mensagem"></p>
+<input type="password" id="senha" placeholder="Senha">
+
+<button onclick="login()">Entrar</button>
+
 </div>
 
-<script src="script.js"></script>
+<script>
+
+function login(){
+
+    let usuario = document.getElementById("usuario").value;
+    let senha = document.getElementById("senha").value;
+
+    // LOGIN TESTE
+    if(usuario === "admin" && senha === "1234"){
+
+        localStorage.setItem("usuario", usuario);
+
+        alert("Login realizado com sucesso!");
+
+        window.location.href = "dashboard.html";
+
+    }else{
+        alert("Usuário ou senha incorretos");
+    }
+}
+
+</script>
 
 </body>
 </html>
