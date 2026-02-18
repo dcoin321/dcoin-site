@@ -1,66 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<title>DCOIN Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCOIN - Login</title>
 
 <style>
-
 body{
-background:black;
-font-family:Arial;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-color:gold;
+    margin:0;
+    font-family:Arial;
+    background:#0d0d0d;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
 }
 
-.card{
-background:#111;
-padding:40px;
-border-radius:15px;
-box-shadow:0 0 25px gold;
-text-align:center;
-width:300px;
+.login-box{
+    background:#161616;
+    padding:30px;
+    border-radius:12px;
+    width:90%;
+    max-width:350px;
+    text-align:center;
+    box-shadow:0 0 15px rgba(255,215,0,0.4);
+}
+
+h1{
+    color:gold;
 }
 
 input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:none;
-font-size:16px;
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
 }
 
 button{
-background:gold;
-color:black;
-border:none;
-padding:15px;
-width:100%;
-font-size:18px;
-border-radius:10px;
-cursor:pointer;
-transition:0.3s;
+    width:100%;
+    padding:12px;
+    margin-top:15px;
+    border:none;
+    border-radius:8px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+    font-size:16px;
+    cursor:pointer;
 }
-
-button:hover{
-background:white;
-transform:scale(1.05);
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="login-box">
 
 <h1>DCOIN</h1>
-<p>Login do Investidor</p>
+<p>Bem-vindo</p>
 
 <input type="text" id="usuario" placeholder="Usuário">
 <input type="password" id="senha" placeholder="Senha">
@@ -73,15 +72,21 @@ transform:scale(1.05);
 
 function login(){
 
-let user = document.getElementById("usuario").value;
-let pass = document.getElementById("senha").value;
+    let usuario = document.getElementById("usuario").value;
+    let senha = document.getElementById("senha").value;
 
-if(user === "admin" && pass === "1234"){
-alert("Login realizado com sucesso 🚀");
-}else{
-alert("Usuário ou senha incorretos");
-}
+    if(usuario === "" || senha === ""){
+        alert("Preencha usuário e senha");
+        return;
+    }
 
+    /* salva usuário */
+    localStorage.setItem("usuario", usuario);
+
+    alert("Login realizado com sucesso ✅");
+
+    /* REDIRECIONA PARA O DASHBOARD */
+    window.location.href = "dashboard.html";
 }
 
 </script>
