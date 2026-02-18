@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DCOIN - Dashboard</title>
+<title>DCOIN Dashboard</title>
 
 <style>
 body{
@@ -28,32 +28,29 @@ body{
 
 .card{
     background:#161616;
-    border-radius:12px;
     padding:20px;
     margin-bottom:20px;
+    border-radius:12px;
     box-shadow:0 0 10px rgba(255,215,0,0.3);
 }
 
 .saldo{
-    font-size:30px;
+    font-size:28px;
     color:#00ff88;
     font-weight:bold;
 }
 
 .btn{
     width:100%;
-    padding:14px;
+    padding:12px;
     margin-top:10px;
     border:none;
     border-radius:8px;
     background:gold;
     color:black;
-    font-size:16px;
     font-weight:bold;
-    cursor:pointer;
 }
 
-/* MENU APP */
 .menu{
     position:fixed;
     bottom:0;
@@ -61,28 +58,30 @@ body{
     background:black;
     display:flex;
     justify-content:space-around;
-    padding:12px 0;
+    padding:12px;
     border-top:2px solid gold;
-}
-
-.menu span{
-    cursor:pointer;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">
-💳 DCOIN Digital
-</div>
+<div class="header">💳 DCOIN Digital</div>
 
 <div class="container">
+
 <div id="aviso" class="card"></div>
+
 <div class="card">
-<p>Bem-vindo, <span id="usuario"></span></p>
+<p>Bem-vindo, <span id="usuarioNome"></span></p>
 <p>Saldo disponível</p>
 <div class="saldo" id="saldo"></div>
+</div>
+
+<div class="card">
+<h3>🔗 Seu link de indicação</h3>
+<p id="linkAfiliado"></p>
+<button class="btn" onclick="copiarLink()">Copiar link</button>
 </div>
 
 <div class="card">
@@ -94,7 +93,6 @@ body{
 
 </div>
 
-<!-- MENU -->
 <div class="menu">
 <span onclick="location.reload()">🏠 Início</span>
 <span onclick="irInvestir()">📊 Investir</span>
@@ -111,66 +109,61 @@ if(!usuario){
     window.location.href="index.html";
 }
 
-document.getElementById("usuario").innerText = usuario;
+document.getElementById("usuarioNome").innerText = usuario;
 
 /* SALDO */
-let saldo = localStorage.getItem("saldo");
+let saldo = Number(localStorage.getItem("saldo"));
+document.getElementById("saldo").innerText =
+"R$ " + saldo.toFixed(2);
 
-if(!saldo){
-    saldo = 100;
-    localStorage.setItem("saldo", saldo);
-}
-
-atualizar();
-
-/* FUNÇÕES */
-
-function atualizar(){
-    document.getElementById("saldo").innerText =
-        "R$ " + Number(saldo).toFixed(2);
-}
-
-function ganhar(){
-    saldo = Number(saldo) + 10;
-    localStorage.setItem("saldo", saldo);
-    atualizar();
-    alert("Bônus recebido 🚀");
-}
-
-/* IR PARA INVESTIMENTO */
-function irInvestir(){
-    window.location.href="investir.html";
-}
-
-/* WHATSAPP DE DEPÓSITO */
-function depositar(){
-
-    let numero = "5582996579331";
-
-    let mensagem =
-    "Olá, quero fazer um depósito na plataforma DCOIN.";
-
-    let link =
-    "https://wa.me/" + numero +
-    "?text=" + encodeURIComponent(mensagem);
-
-    window.open(link,"_blank");
-}
-
-/* LOGOUT */
-function logout(){
-    localStorage.removeItem("usuario");
-    alert("Você saiu da conta");
-    window.location.href="index.html";
-}
-
-/* MOSTRAR AVISO DO ADMIN */
+/* AVISO ADMIN */
 let aviso = localStorage.getItem("avisoGlobal");
 
 if(aviso){
     document.getElementById("aviso").innerText =
-        "📢 " + aviso;
-    }</script>
+    "📢 " + aviso;
+}else{
+    document.getElementById("aviso").style.display="none";
+}
+
+/* LINK AFILIADO */
+let link =
+window.location.origin +
+"/dcoin-site/?ref=" + usuario;
+
+document.getElementById("linkAfiliado").innerText = link;
+
+function copiarLink(){
+    navigator.clipboard.writeText(link);
+    alert("Link copiado ✅");
+}
+
+/* FUNÇÕES */
+function ganhar(){
+    saldo += 10;
+    localStorage.setItem("saldo", saldo);
+    location.reload();
+}
+
+function irInvestir(){
+    window.location.href="investir.html";
+}
+
+function depositar(){
+    let numero="5582996579331";
+    let mensagem="Olá, quero fazer um depósito na DCOIN.";
+    window.open(
+        "https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem),
+        "_blank"
+    );
+}
+
+function logout(){
+    localStorage.removeItem("usuario");
+    window.location.href="index.html";
+}
+
+</script>
 
 </body>
 </html>
