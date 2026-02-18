@@ -3,32 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DCOIN - Painel</title>
+<title>DCOIN - Dashboard</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial, Helvetica, sans-serif;
+    font-family:Arial;
     background:#0d0d0d;
     color:white;
 }
 
-/* TOPO */
 .header{
     background:black;
     padding:15px;
     text-align:center;
     font-size:22px;
-    font-weight:bold;
     border-bottom:2px solid #00ff88;
 }
 
-/* CONTAINER */
 .container{
     padding:20px;
 }
 
-/* CARD SALDO */
 .card{
     background:#161616;
     border-radius:12px;
@@ -38,12 +34,11 @@ body{
 }
 
 .saldo{
-    font-size:28px;
+    font-size:30px;
     color:#00ff88;
     font-weight:bold;
 }
 
-/* BOTÕES */
 .btn{
     width:100%;
     padding:15px;
@@ -57,11 +52,6 @@ body{
     cursor:pointer;
 }
 
-.btn:hover{
-    background:#00cc6a;
-}
-
-/* MENU INFERIOR */
 .menu{
     position:fixed;
     bottom:0;
@@ -71,26 +61,21 @@ body{
     justify-content:space-around;
     padding:10px 0;
 }
-
-.menu a{
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-🚀 DCOIN Dashboard
+🚀 DCOIN - Painel do Usuário
 </div>
 
 <div class="container">
 
 <div class="card">
+<p>Bem-vindo, <span id="usuario"></span></p>
 <p>Saldo disponível</p>
-<div class="saldo">R$ 120,00</div>
+<div class="saldo" id="saldo">R$ 0</div>
 </div>
 
 <div class="card">
@@ -102,16 +87,48 @@ body{
 </div>
 
 <div class="menu">
-<a href="#">🏠 Início</a>
-<a href="#">💰 Carteira</a>
-<a href="#">📊 Investir</a>
-<a href="#">👤 Perfil</a>
+<span>🏠 Início</span>
+<span>💰 Carteira</span>
+<span>📊 Investir</span>
+<span>👤 Perfil</span>
 </div>
 
 <script>
-function ganhar(){
-    alert("Parabéns! + R$10 adicionados (simulação)");
+
+/* VERIFICAR LOGIN */
+let usuario = localStorage.getItem("usuario");
+
+if(!usuario){
+    alert("Faça login primeiro!");
+    window.location.href = "index.html";
 }
+
+document.getElementById("usuario").innerText = usuario;
+
+/* SALDO */
+let saldo = localStorage.getItem("saldo");
+
+if(!saldo){
+    saldo = 100;
+    localStorage.setItem("saldo", saldo);
+}
+
+atualizarSaldo();
+
+/* FUNÇÕES */
+
+function atualizarSaldo(){
+    document.getElementById("saldo").innerText =
+        "R$ " + Number(saldo).toFixed(2);
+}
+
+function ganhar(){
+    saldo = Number(saldo) + 10;
+    localStorage.setItem("saldo", saldo);
+    atualizarSaldo();
+    alert("Você ganhou + R$10 🚀");
+}
+
 </script>
 
 </body>
