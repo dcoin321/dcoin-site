@@ -5,23 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
+
 body{
 background:black;
-color:gold;
 font-family:Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+color:gold;
+}
+
+.card{
+background:#111;
+padding:40px;
+border-radius:15px;
+box-shadow:0 0 20px gold;
 text-align:center;
-padding-top:80px;
+width:300px;
 }
 
 h1{
-font-size:40px;
+margin-bottom:10px;
 }
 
 button{
 background:gold;
 color:black;
 border:none;
-padding:15px 30px;
+padding:15px;
+width:100%;
 font-size:18px;
 border-radius:10px;
 cursor:pointer;
@@ -29,23 +43,27 @@ transition:0.3s;
 }
 
 button:hover{
-transform:scale(1.1);
 background:white;
+transform:scale(1.05);
 }
+
 </style>
 </head>
 
 <body>
 
-<h1>🚀 DCOIN</h1>
+<div class="card">
 
-<p>Bem-vindo ao futuro digital.</p>
+<h1>DCOIN</h1>
+<p>Plataforma Digital</p>
 
-<button onclick="entrar()">Entrar</button>
+<button onclick="entrar()">Acessar Conta</button>
+
+</div>
 
 <script>
 function entrar(){
-alert("Bem-vindo ao DCOIN!");
+alert("Área do usuário em construção 🚀");
 }
 </script>
 
