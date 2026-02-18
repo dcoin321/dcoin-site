@@ -1,58 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>DCOIN Login</title>
-
-<link rel="stylesheet" href="style.css">
 
 <style>
 body{
-    margin:0;
-    font-family:Arial, Helvetica, sans-serif;
-    background:linear-gradient(135deg,#000,#111);
+    background:black;
+    font-family:Arial;
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
     height:100vh;
-    color:white;
 }
 
-.login-box{
-    background:#0f0f0f;
+.caixa{
+    background:#111;
     padding:30px;
-    border-radius:15px;
-    width:300px;
+    border-radius:10px;
     text-align:center;
-    box-shadow:0 0 20px rgba(212,175,55,0.5);
-}
-
-h1{
-    color:#d4af37;
 }
 
 input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:none;
-    border-radius:8px;
+    display:block;
+    margin:10px auto;
+    padding:10px;
+    width:200px;
 }
 
 button{
-    width:100%;
-    padding:12px;
-    background:#d4af37;
+    padding:10px;
+    background:gold;
     border:none;
-    border-radius:8px;
-    font-weight:bold;
     cursor:pointer;
-}
-
-button:hover{
-    background:#b8962e;
 }
 </style>
 
@@ -60,4 +41,34 @@ button:hover{
 
 <body>
 
-<div class
+<div class="caixa">
+
+<h2>DCOIN</h2>
+
+<input id="usuario" placeholder="Usuário">
+<input id="senha" type="password" placeholder="Senha">
+
+<button onclick="entrar()">Entrar</button>
+
+</div>
+
+<script>
+
+function entrar(){
+
+    var usuario = document.getElementById("usuario").value;
+    var senha = document.getElementById("senha").value;
+
+    if(usuario=="admin" && senha=="1234"){
+        alert("Login realizado!");
+        window.location.href="dashboard.html";
+    }else{
+        alert("Senha incorreta");
+    }
+
+}
+
+</script>
+
+</body>
+</html>
