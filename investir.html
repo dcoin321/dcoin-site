@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DCOIN - Investir</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0d0d0d;
+    color:white;
+}
+
+.header{
+    background:black;
+    padding:15px;
+    text-align:center;
+    font-size:22px;
+    border-bottom:2px solid gold;
+}
+
+.container{
+    padding:20px;
+}
+
+.plano{
+    background:#161616;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:12px;
+    box-shadow:0 0 10px rgba(255,215,0,0.3);
+}
+
+.btn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.ativo{
+    color:#00ff88;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+💰 Investimentos DCOIN
+</div>
+
+<div class="container">
+
+<div id="investimentoAtivo" class="plano"></div>
+
+<div class="plano">
+<h3>Plano R$10</h3>
+<p>Rendimento diário simulado</p>
+<button class="btn" onclick="investir(10)">Aplicar</button>
+</div>
+
+<div class="plano">
+<h3>Plano R$50</h3>
+<button class="btn" onclick="investir(50)">Aplicar</button>
+</div>
+
+<div class="plano">
+<h3>Plano R$200</h3>
+<button class="btn" onclick="investir(200)">Aplicar</button>
+</div>
+
+<div class="plano">
+<h3>Plano R$600</h3>
+<button class="btn" onclick="investir(600)">Aplicar</button>
+</div>
+
+<div class="plano">
+<h3>Plano R$1000</h3>
+<button class="btn" onclick="investir(1000)">Aplicar</button>
+</div>
+
+</div>
+
+<script>
+
+/* verificar login */
+if(!localStorage.getItem("usuario")){
+    window.location.href="index.html";
+}
+
+/* carregar investimento */
+let investimento = JSON.parse(localStorage.getItem("investimento"));
+
+mostrarInvestimento();
+
+/* função investir */
+function investir(valor){
+
+    let saldo = Number(localStorage.getItem("saldo"));
+
+    if(saldo < valor){
+        alert("Saldo insuficiente!");
+        return;
+    }
+
+    saldo -= valor;
+    localStorage.setItem("saldo", saldo);
+
+    investimento = {
+        valor: valor,
+        inicio: Date.now()
+    };
+
+    localStorage.setItem("investimento",
+        JSON.stringify(investimento));
+
+    alert("Investimento ativado 🚀");
+
+    mostrarInvestimento();
+}
+
+/* rendimento automático */
+function calcularLucro(){
+
+    if(!investimento) return;
+
+    let agora = Date.now();
+    let dias = Math.floor((agora - investimento.inicio) / 86400000);
+
+    let lucro = investimento.valor * 0.05 * dias;
+
+    document.getElementById("investimentoAtivo").innerHTML =
+        `<h3 class="ativo">Investimento ativo</h3>
+        Valor: R$ ${investimento.valor}<br>
+        Dias decorridos: ${dias}<br>
+        Lucro estimado: R$ ${lucro.toFixed(2)}`;
+}
+
+function mostrarInvestimento(){
+    calcularLucro();
+}
+
+/* atualiza a cada 5 segundos */
+setInterval(calcularLucro,5000);
+
+</script>
+
+</body>
+</html>
