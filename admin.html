@@ -61,7 +61,11 @@ button{
 </div>
 
 <div class="container">
-
+<div class="card">
+<h3>Acessar conta do usuário</h3>
+<input id="usuarioSuporte" placeholder="Nome do usuário">
+<button onclick="acessarConta()">Entrar como usuário</button>
+</div>
 <div class="card">
 <h3>Alterar saldo do usuário</h3>
 <input id="novoSaldo" type="number" placeholder="Novo saldo">
@@ -115,8 +119,22 @@ function enviarAviso(){
 
     alert("Comunicado enviado 🚀");
 }
+function acessarConta(){
 
-</script>
+    let user = document.getElementById("usuarioSuporte").value;
+
+    if(user === ""){
+        alert("Digite o usuário");
+        return;
+    }
+
+    /* define usuário ativo */
+    localStorage.setItem("usuario", user);
+
+    alert("Acessando conta do usuário ✅");
+
+    window.location.href="dashboard.html";
+}</script>
 
 </body>
 </html>
