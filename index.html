@@ -2,48 +2,62 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>DCOIN Login</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(135deg,#000,#111);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    color:white;
+}
+
+.login-box{
+    background:#0f0f0f;
+    padding:30px;
+    border-radius:15px;
+    width:300px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(212,175,55,0.5);
+}
+
+h1{
+    color:#d4af37;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#d4af37;
+    border:none;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#b8962e;
+}
+</style>
 
 </head>
 
 <body>
 
-<div class="login-box">
-
-<h1>DCOIN</h1>
-
-<input type="text" id="usuario" placeholder="Usuário">
-
-<input type="password" id="senha" placeholder="Senha">
-
-<button onclick="login()">Entrar</button>
-
-</div>
-
-<script>
-
-function login(){
-
-    let usuario = document.getElementById("usuario").value;
-    let senha = document.getElementById("senha").value;
-
-    // LOGIN TESTE
-    if(usuario === "admin" && senha === "1234"){
-
-        localStorage.setItem("usuario", usuario);
-
-        alert("Login realizado com sucesso!");
-
-        window.location.href = "dashboard.html";
-
-    }else{
-        alert("Usuário ou senha incorretos");
-    }
-}
-
-</script>
-
-</body>
-</html>
+<div class
