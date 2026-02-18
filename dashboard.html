@@ -78,7 +78,7 @@ body{
 </div>
 
 <div class="container">
-
+<div id="aviso" class="card"></div>
 <div class="card">
 <p>Bem-vindo, <span id="usuario"></span></p>
 <p>Saldo disponível</p>
@@ -164,7 +164,13 @@ function logout(){
     window.location.href="index.html";
 }
 
-</script>
+/* MOSTRAR AVISO DO ADMIN */
+let aviso = localStorage.getItem("avisoGlobal");
+
+if(aviso){
+    document.getElementById("aviso").innerText =
+        "📢 " + aviso;
+    }</script>
 
 </body>
 </html>
