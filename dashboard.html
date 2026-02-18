@@ -18,11 +18,12 @@ body{
     padding:15px;
     text-align:center;
     font-size:22px;
-    border-bottom:2px solid #00ff88;
+    border-bottom:2px solid gold;
 }
 
 .container{
     padding:20px;
+    margin-bottom:80px;
 }
 
 .card{
@@ -30,7 +31,7 @@ body{
     border-radius:12px;
     padding:20px;
     margin-bottom:20px;
-    box-shadow:0 0 10px rgba(0,255,136,0.3);
+    box-shadow:0 0 10px rgba(255,215,0,0.3);
 }
 
 .saldo{
@@ -41,17 +42,18 @@ body{
 
 .btn{
     width:100%;
-    padding:15px;
+    padding:14px;
     margin-top:10px;
     border:none;
     border-radius:8px;
-    background:#00ff88;
+    background:gold;
     color:black;
     font-size:16px;
     font-weight:bold;
     cursor:pointer;
 }
 
+/* MENU APP */
 .menu{
     position:fixed;
     bottom:0;
@@ -59,7 +61,12 @@ body{
     background:black;
     display:flex;
     justify-content:space-around;
-    padding:10px 0;
+    padding:12px 0;
+    border-top:2px solid gold;
+}
+
+.menu span{
+    cursor:pointer;
 }
 </style>
 </head>
@@ -67,7 +74,7 @@ body{
 <body>
 
 <div class="header">
-🚀 DCOIN - Painel do Usuário
+💳 DCOIN Digital
 </div>
 
 <div class="container">
@@ -75,32 +82,33 @@ body{
 <div class="card">
 <p>Bem-vindo, <span id="usuario"></span></p>
 <p>Saldo disponível</p>
-<div class="saldo" id="saldo">R$ 0</div>
+<div class="saldo" id="saldo"></div>
 </div>
 
 <div class="card">
-<button class="btn" onclick="ganhar()">Ganhar DCOIN</button>
-<button class="btn">Depositar</button>
-<button class="btn">Sacar</button>
+<button class="btn" onclick="depositar()">Depositar</button>
+<button class="btn" onclick="irInvestir()">Investir</button>
+<button class="btn" onclick="ganhar()">Ganhar bônus</button>
+<button class="btn" onclick="logout()">Sair</button>
 </div>
 
 </div>
 
+<!-- MENU -->
 <div class="menu">
-<span>🏠 Início</span>
-<span>💰 Carteira</span>
-<span>📊 Investir</span>
-<span>👤 Perfil</span>
+<span onclick="location.reload()">🏠 Início</span>
+<span onclick="irInvestir()">📊 Investir</span>
+<span onclick="depositar()">💰 Depositar</span>
+<span onclick="logout()">🚪 Sair</span>
 </div>
 
 <script>
 
-/* VERIFICAR LOGIN */
+/* PROTEÇÃO LOGIN */
 let usuario = localStorage.getItem("usuario");
 
 if(!usuario){
-    alert("Faça login primeiro!");
-    window.location.href = "index.html";
+    window.location.href="index.html";
 }
 
 document.getElementById("usuario").innerText = usuario;
@@ -113,11 +121,11 @@ if(!saldo){
     localStorage.setItem("saldo", saldo);
 }
 
-atualizarSaldo();
+atualizar();
 
 /* FUNÇÕES */
 
-function atualizarSaldo(){
+function atualizar(){
     document.getElementById("saldo").innerText =
         "R$ " + Number(saldo).toFixed(2);
 }
@@ -125,8 +133,35 @@ function atualizarSaldo(){
 function ganhar(){
     saldo = Number(saldo) + 10;
     localStorage.setItem("saldo", saldo);
-    atualizarSaldo();
-    alert("Você ganhou + R$10 🚀");
+    atualizar();
+    alert("Bônus recebido 🚀");
+}
+
+/* IR PARA INVESTIMENTO */
+function irInvestir(){
+    window.location.href="investir.html";
+}
+
+/* WHATSAPP DE DEPÓSITO */
+function depositar(){
+
+    let numero = "5582996579331";
+
+    let mensagem =
+    "Olá, quero fazer um depósito na plataforma DCOIN.";
+
+    let link =
+    "https://wa.me/" + numero +
+    "?text=" + encodeURIComponent(mensagem);
+
+    window.open(link,"_blank");
+}
+
+/* LOGOUT */
+function logout(){
+    localStorage.removeItem("usuario");
+    alert("Você saiu da conta");
+    window.location.href="index.html";
 }
 
 </script>
