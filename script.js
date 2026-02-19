@@ -1,17 +1,17 @@
 function login() {
 
-    const usuario = document.getElementById("usuario").value;
-    const senha = document.getElementById("senha").value;
+    const usuario = document.getElementById("usuario").value.trim().toLowerCase();
+    const senha = document.getElementById("senha").value.trim();
 
     // ADMIN
-    if(usuario === "admin" && senha === "123") {
-        window.location.href = "admin/admin.html";
+    if (usuario === "admin" && senha === "123") {
+        window.location.href = "./admin/admin.html";
         return;
     }
 
     // USUÁRIO NORMAL
-    if(usuario === "user" && senha === "123") {
-        window.location.href = "user/dashboard.html";
+    if (usuario === "user" && senha === "123") {
+        window.location.href = "./user/dashboard.html";
         return;
     }
 
