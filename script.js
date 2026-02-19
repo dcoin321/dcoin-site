@@ -5,13 +5,13 @@ function login() {
 
     // ADMIN
     if (usuario === "admin" && senha === "123") {
-        window.location.href = "./admin/admin.html";
+        window.location.href = "admin/admin.html";
         return;
     }
 
-    // USUÁRIO NORMAL
+    // USUÁRIO
     if (usuario === "user" && senha === "123") {
-        window.location.href = "./user/dashboard.html";
+        window.location.href = "user/dashboard.html";
         return;
     }
 
