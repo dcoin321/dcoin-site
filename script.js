@@ -1,21 +1,18 @@
-// =======================
-// LOGIN
-// =======================
+
+// ================= LOGIN =================
 function login(){
 
-    let u = document.getElementById("usuario").value;
-    let s = document.getElementById("senha").value;
+    let usuario = document.getElementById("usuario").value;
+    let senha = document.getElementById("senha").value;
 
-    // ADMIN
-    if(u === "admin" && s === "1234"){
-        localStorage.setItem("usuario","admin");
+    if(usuario === "admin" && senha === "1234"){
+        localStorage.setItem("tipo","admin");
         window.location.href="admin.html";
         return;
     }
 
-    // USUÁRIO NORMAL
-    if(u === "user" && s === "1234"){
-        localStorage.setItem("usuario","user");
+    if(usuario === "user" && senha === "1234"){
+        localStorage.setItem("tipo","user");
         window.location.href="dashboard.html";
         return;
     }
@@ -23,53 +20,38 @@ function login(){
     alert("Login inválido");
 }
 
-// =======================
-// LOGOUT
-// =======================
+// ================= PROTEÇÃO =================
+let tipo = localStorage.getItem("tipo");
+
+// proteger admin
+if(window.location.pathname.includes("admin.html")){
+    if(tipo !== "admin"){
+        window.location.href="index.html";
+    }
+}
+
+// proteger dashboard
+if(window.location.pathname.includes("dashboard.html")){
+    if(tipo !== "user"){
+        window.location.href="index.html";
+    }
+}
+
+// ================= LOGOUT =================
 function logout(){
-    localStorage.removeItem("usuario");
+    localStorage.removeItem("tipo");
     window.location.href="index.html";
 }
 
-// =======================
-// PROTEÇÃO DAS PÁGINAS
-// =======================
-
-let tipoUsuario = localStorage.getItem("usuario");
-
-// BLOQUEIA DASHBOARD SEM LOGIN
-if(location.pathname.includes("dashboard.html")){
-    if(tipoUsuario !== "user"){
-        window.location.href="index.html";
-    }
-}
-
-// BLOQUEIA ADMIN SEM SER ADMIN
-if(location.pathname.includes("admin.html")){
-    if(tipoUsuario !== "admin"){
-        window.location.href="index.html";
-    }
-}
-
-// =======================
-// FUNÇÕES ADMIN
-// =======================
+// ================= ADMIN =================
 function ativarPlano(){
     let valor = document.getElementById("valor").value;
     localStorage.setItem("saldo", valor);
-    alert("Plano ativado!");
+    alert("Investimento ativado!");
 }
 
-function enviarAviso(){
-    let msg = document.getElementById("msg").value;
-    localStorage.setItem("aviso", msg);
-    alert("Comunicado enviado!");
-}
-
-// =======================
-// MOSTRAR SALDO USUÁRIO
-// =======================
+// ================= MOSTRAR SALDO =================
 if(document.getElementById("saldo")){
-    document.getElementById("saldo").innerText =
-        "R$ " + (localStorage.getItem("saldo") || "0,00");
+    let saldo = localStorage.getItem("saldo") || "0,00";
+    document.getElementById("saldo").innerText = "R$ " + saldo;
 }
