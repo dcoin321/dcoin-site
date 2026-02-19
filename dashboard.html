@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DCOIN Dashboard</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#0b0f1a;
+color:white;
+display:flex;
+}
+
+/* MENU LATERAL */
+.sidebar{
+width:220px;
+background:#0f1424;
+height:100vh;
+padding:20px;
+}
+
+.logo{
+font-size:22px;
+font-weight:bold;
+color:#a855f7;
+margin-bottom:30px;
+}
+
+.menu{
+margin:15px 0;
+color:#aaa;
+}
+
+/* AREA PRINCIPAL */
+.main{
+flex:1;
+padding:25px;
+}
+
+/* CARDS */
+.cards{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.card{
+background:linear-gradient(145deg,#111827,#1f2937);
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 20px rgba(168,85,247,0.2);
+}
+
+.card h3{
+color:#aaa;
+}
+
+.valor{
+font-size:28px;
+color:#a855f7;
+margin-top:10px;
+}
+
+/* GRAFICO FAKE */
+.chart{
+margin-top:30px;
+height:200px;
+background:linear-gradient(to top,#a855f7,transparent);
+border-radius:15px;
+}
+
+/* BARRAS */
+.progress{
+margin-top:20px;
+}
+
+.bar{
+height:10px;
+background:#222;
+border-radius:10px;
+margin:10px 0;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+background:#a855f7;
+width:70%;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+<div class="logo">DCOIN</div>
+
+<div class="menu">🏠 Dashboard</div>
+<div class="menu">💰 Investimentos</div>
+<div class="menu">📊 Relatórios</div>
+<div class="menu">⚙ Configurações</div>
+
+</div>
+
+<div class="main">
+
+<h2>Bem-vindo ao Painel</h2>
+
+<div class="cards">
+
+<div class="card">
+<h3>Saldo Total</h3>
+<div class="valor">R$ 12.450</div>
+</div>
+
+<div class="card">
+<h3>Lucro Hoje</h3>
+<div class="valor">+ R$ 320</div>
+</div>
+
+<div class="card">
+<h3>Investimentos</h3>
+<div class="valor">8 ativos</div>
+</div>
+
+</div>
+
+<div class="chart"></div>
+
+<div class="progress">
+<h3>Meta mensal</h3>
+<div class="bar">
+<div class="fill"></div>
+</div>
+</div>
+
+</div>
+
+</body>
+</html>
