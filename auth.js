@@ -1,19 +1,31 @@
-const ADMIN_USER = "admin";
-const ADMIN_PASS = "1234";
+function login(){
 
-document
-.getElementById("loginForm")
-.addEventListener("submit", function(e){
+    const usuario = document.getElementById("usuario").value;
+    const senha = document.getElementById("senha").value;
+    const erro = document.getElementById("erro");
 
-    e.preventDefault();
+    // usuários de teste
+    const usuarios = [
+        {user:"admin", pass:"123", tipo:"admin"},
+        {user:"usuario", pass:"123", tipo:"user"}
+    ];
 
-    const user = document.getElementById("username").value;
-    const pass = document.getElementById("password").value;
+    const encontrado = usuarios.find(
+        u => u.user === usuario && u.pass === senha
+    );
 
-    if(user === ADMIN_USER && pass === ADMIN_PASS){
-        alert("Login realizado com sucesso!");
-    } else {
-        document.getElementById("error").innerText =
-        "Usuário ou senha inválidos";
+    if(encontrado){
+
+        localStorage.setItem("logado", "true");
+        localStorage.setItem("tipo", encontrado.tipo);
+
+        if(encontrado.tipo === "admin"){
+            window.location.href = "admin.html";
+        }else{
+            window.location.href = "dashboard.html";
+        }
+
+    }else{
+        erro.innerText = "Usuário ou senha inválidos";
     }
-});
+}
