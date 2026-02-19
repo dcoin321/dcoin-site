@@ -1,20 +1,20 @@
-function login(){
+function login() {
 
     const usuario = document.getElementById("usuario").value;
     const senha = document.getElementById("senha").value;
-    const erro = document.getElementById("erro");
 
-    // usuário normal
-    if(usuario === "user" && senha === "1234"){
-        window.location.href = "user.html";
+    // ADMIN
+    if(usuario === "admin" && senha === "123") {
+        window.location.href = "admin/admin.html";
         return;
     }
 
-    // administrador
-    if(usuario === "admin" && senha === "admin123"){
-        window.location.href = "admin.html";
+    // USUÁRIO NORMAL
+    if(usuario === "user" && senha === "123") {
+        window.location.href = "user/dashboard.html";
         return;
     }
 
-    erro.innerText = "Usuário ou senha incorretos!";
+    document.getElementById("erro").innerText =
+        "Usuário ou senha incorretos";
 }
