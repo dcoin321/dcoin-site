@@ -1,34 +1,59 @@
+// =======================
 // LOGIN
+// =======================
 function login(){
 
     let u = document.getElementById("usuario").value;
     let s = document.getElementById("senha").value;
 
-    if(u==="admin" && s==="1234"){
+    // ADMIN
+    if(u === "admin" && s === "1234"){
         localStorage.setItem("usuario","admin");
         window.location.href="admin.html";
+        return;
     }
-    else if(u==="user" && s==="1234"){
+
+    // USUÁRIO NORMAL
+    if(u === "user" && s === "1234"){
         localStorage.setItem("usuario","user");
         window.location.href="dashboard.html";
+        return;
     }
-    else{
-        alert("Login inválido");
-    }
+
+    alert("Login inválido");
 }
 
+// =======================
 // LOGOUT
+// =======================
 function logout(){
     localStorage.removeItem("usuario");
     window.location.href="index.html";
 }
 
-// PROTEÇÃO DE PÁGINA
-if(location.pathname.includes("dashboard") && !localStorage.getItem("usuario")){
-    window.location.href="index.html";
+// =======================
+// PROTEÇÃO DAS PÁGINAS
+// =======================
+
+let tipoUsuario = localStorage.getItem("usuario");
+
+// BLOQUEIA DASHBOARD SEM LOGIN
+if(location.pathname.includes("dashboard.html")){
+    if(tipoUsuario !== "user"){
+        window.location.href="index.html";
+    }
 }
 
-// ADMIN FUNÇÕES
+// BLOQUEIA ADMIN SEM SER ADMIN
+if(location.pathname.includes("admin.html")){
+    if(tipoUsuario !== "admin"){
+        window.location.href="index.html";
+    }
+}
+
+// =======================
+// FUNÇÕES ADMIN
+// =======================
 function ativarPlano(){
     let valor = document.getElementById("valor").value;
     localStorage.setItem("saldo", valor);
@@ -41,7 +66,9 @@ function enviarAviso(){
     alert("Comunicado enviado!");
 }
 
-// MOSTRAR SALDO
+// =======================
+// MOSTRAR SALDO USUÁRIO
+// =======================
 if(document.getElementById("saldo")){
     document.getElementById("saldo").innerText =
         "R$ " + (localStorage.getItem("saldo") || "0,00");
